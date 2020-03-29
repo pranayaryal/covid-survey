@@ -32,28 +32,29 @@ const App = () => {
       .firestore()
       .collection('ppe')
       .add({
-        aerosolizing: aerosolizing,
-        average: average,
-        confirmed: confirmed,
-        location: location,
-        provider_quarantined: providerQuarantined,
-        suspected: suspected,
-        testing_availability: testingAvailability,
-        turnaround_time: turnAroundTime,
-        ventilator_testing_rationing: ventilatorTestingRationing,
+        aerosolizing,
+        average,
+        confirmed,
+        location,
+        providerQuarantined,
+        suspected,
+        testingAvailability,
+        turnAroundTime,
+        ventilatorTestingRationing,
 
-      });
-
-    setSuccessMessage("Congrats, your data was submitted!");
-    setAerosolizing("");
-    setConfirmed("");
-    setConfirmed("");
-    setLocation("");
-    setProviderQuarantined("");
-    setSuspected("");
-    setTestingAvailability("");
-    setTurnAroundTime("");
-    setVentilatorTestingRationing("");
+      })
+      .then(() => {
+        setSuccessMessage("Congrats, your data was submitted!");
+        setAerosolizing('');
+        setConfirmed("");
+        setConfirmed("");
+        setLocation("");
+        setProviderQuarantined(false);
+        setSuspected("");
+        setTestingAvailability("");
+        setTurnAroundTime("");
+        setVentilatorTestingRationing("");
+      })
 
 
   }
@@ -68,7 +69,7 @@ const App = () => {
             <TextInput handleTextChange={e => setLocation(e.target.value)} />
           </div>
         </div>
-        <h1>PPE</h1>
+        <h1>What PPE are you using when you see these patients?</h1>
         <div className="columns">
           <div className="column">
             <TextArea heading="An average patient"
@@ -78,6 +79,7 @@ const App = () => {
           <div className="column">
             <TextArea heading="A patient with suspected COVID-19"
               handleTextChange={e => setSuspected(e.target.value)}
+              name="suspected"
             />
           </div>
         </div>
@@ -85,11 +87,13 @@ const App = () => {
           <div className="column">
             <TextArea heading="A patient with known COVID"
               handleTextChange={e => setConfirmed(e.target.value)}
+              name="confirmed"
             />
           </div>
           <div className="column">
             <TextArea heading="Aerosolizing procedure (intubation, bronchoscopy) for a patient with COVID-19"
               handleTextChange={e => setAerosolizing(e.target.value)}
+              name="aerosolizing"
             />
           </div>
         </div>
@@ -98,16 +102,19 @@ const App = () => {
           <div className="column">
             <TextArea heading="Availability of testing for COVID"
               handleTextChange={e => setTestingAvailability(e.target.value)}
+              name="testingAvailability"
             />
           </div>
           <div className="column">
             <TextArea heading="Turn-around time for COVID-19 tests"
               handleTextChange={e => setTurnAroundTime(e.target.value)}
+              name="turnaroundTime"
             />
           </div>
           <div className="column">
             <Dropdown subject="If a provider is exposed/symptomatic (and if testing is available), are they quarantined for 14 days?"
               handleDropChange={e => setProviderQuarantined(e.target.value)}
+              name="providerQuarantined"
             />
           </div>
         </div>
@@ -115,6 +122,7 @@ const App = () => {
           <div className="column is-one-third">
             <TextArea heading="How is your institution rationing testing and equipment (ventilators)?"
               handleTextChange={e => setVentilatorTestingRationing(e.target.value)}
+              name="ventilatorTestingRationing"
             />
           </div>
         </div>

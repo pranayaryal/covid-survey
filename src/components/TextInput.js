@@ -6,9 +6,11 @@ const TextInput = props => {
       <label className="label">Hospital or City Name</label>
       <div className="control">
         <input className="input" 
+          name={props.name}
+          value={props.value}
           type="text" 
           placeholder="Hospital or City Name" 
-          onChange={props.handleTextChange}
+          onChange={props.onChange}
           />
       </div>
     </div>

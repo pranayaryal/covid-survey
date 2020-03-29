@@ -5,7 +5,7 @@ const useList = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    firebase
+    const unsubscribe = firebase
       .firestore()
       .collection('ppe')
       .onSnapshot(snapshot => {
@@ -16,6 +16,8 @@ const useList = () => {
 
         setList(newList);
       });
+
+      return () => unsubscribe;
   }, []);
 
 

@@ -5,7 +5,11 @@ const TextArea = props => {
     <div className="field">
       <label className="label">{props.heading}</label>
       <div className="control">
-        <textarea className="textarea" onChange={props.handleTextChange}></textarea>
+        <textarea className="textarea" 
+          onChange={props.onChange}
+          name={props.name}
+          value={props.value}
+          ></textarea>
       </div>
     </div>
   )
